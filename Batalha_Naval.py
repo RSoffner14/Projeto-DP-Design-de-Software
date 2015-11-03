@@ -1,9 +1,9 @@
 from random import randint
 import copy
 
-m = 0
+m = 0 #
 while m < 6:
-        m = int(input("Digite um número para o tamanho da sua mesa de jogo.\n\nDica: Quanto maior o número, mais dificil o jogo sera.\n\nE necessario digitar um número maior do que 6.\n"))         
+        m = int(input("Digite um número para o tamanho da sua mesa de jogo.\n"))         
 
 mesa = []
 
@@ -20,22 +20,7 @@ for f in range(m):
     mesa.append (["+"] * m)
   
 mapa_computador = mesa
-
-boat_size = {6:6,
-             5:5,
-             4:4,
-             3:3,
-             2:2,
-             1:1}
-
-pontuacao_barcos = {6:20,
-                    5:15,
-                    4:10,
-                    3:5,
-                    2:3,
-                    1:1}
-                    
-
+                 
 def mesa_jogo(u, mesa):
     for row in mesa:
         print (" ".join(row), r[u])
@@ -95,18 +80,31 @@ def posicao(navios):
 mapa_computador = posicao(navios)
 print(mapa_computador)
 
-erro = m*5
-rodada = 1
-acertos = 0
+vez = 1
+erradas = m*5
 
-while erro > 0 :
+boat_size = {6:6,
+             5:5,
+             4:4,
+             3:3,
+             2:2,
+             1:1}
+
+pontuacao_barcos = {6:20,
+                    5:15,
+                    4:10,
+                    3:5,
+                    2:3,
+                    1:1}
+
+while erradas > 0 :
     
     if placar_jogo == 54:
         print ("Todos os navios foram afundados!")        
         print ("\nParabens! Voce ganhou o melhor jogo de batalha naval, Marujo!\n")
-        break    
+            
 
-    print ("\nRodada", rodada,"    Placar:",placar_jogo,"\n")
+    print ("\nRodada", vez,"    Placar:",placar_jogo,"\n")
     mesa_jogo(u, mesa)
             
       
@@ -121,8 +119,9 @@ while erro > 0 :
         chute_linha = int(input("\nLinha:\n")) -1
         
    
-    print ("Rodada",rodada, "    Placar:",placar_jogo)
+    print ("Rodada",vez, "    Placar:",placar_jogo)
 
+                    
     if(mesa[chute_linha][chute_coluna] == "X" or mesa[chute_linha][chute_coluna] == "o"):
             print ("\nJá tentou nesse ponto marujo! Tente novamente")
             
@@ -130,7 +129,7 @@ while erro > 0 :
         if mapa_computador[chute_linha][chute_coluna] == "+":
             print ("\nERROOUUUU, água!")
             mesa[chute_linha][chute_coluna] = "o"
-            erro -= 1
+            erradas -= 1
     
         elif mapa_computador[chute_linha][chute_coluna] != "+":
             print ("\nAcertou o ponto do meu navio, marujo!")
@@ -142,4 +141,4 @@ while erro > 0 :
                 placar_jogo += pontuacao_barcos[barco]
             mesa[chute_linha][chute_coluna] = "X"
     
-print ("\nFIM DE JOGO!\n") 
+print ("Fim de jogo!") 
